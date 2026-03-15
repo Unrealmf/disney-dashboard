@@ -693,34 +693,36 @@ body{background:var(--bg);font-family:'DM Sans',sans-serif;color:var(--text)}
 <script>
 // ─── Tab navigation ───────────────────────────────────────
 function showTab(id,btn){
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-  document.querySelectorAll('.ntab').forEach(b=>b.classList.remove('active'));
-  document.getElementById('tab-'+id).classList.add('active');
+  document.querySelectorAll('.tab').forEach(tab=>tab.classList.remove('active'));
+  document.querySelectorAll('.ntab').forEach(nav=>nav.classList.remove('active'));
+  document.getElementById('tab-'+id)?.classList.add('active');
   btn.classList.add('active');
 }
 function showDay(id,btn){
-  ['mk','hs','ep','ak'].forEach(d=>{
-    const el=document.getElementById('d'+d);
-    if(el)el.style.display=d===id?'block':'none';
+  ['mk','hs','ep','ak'].forEach(day=>{
+    const el=document.getElementById('d'+day);
+    if(el)el.style.display=day===id?'block':'none';
   });
-  document.querySelectorAll('#tab-dp .ftab').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('#tab-dp .ftab').forEach(tab=>tab.classList.remove('active'));
   btn.classList.add('active');
 }
 function filterRides(park,btn){
-  document.querySelectorAll('#tab-rd .ftab').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('#tab-rd .ftab').forEach(tab=>tab.classList.remove('active'));
   btn.classList.add('active');
-  document.querySelectorAll('#rl .ride-row').forEach(r=>{
-    r.style.display=(park==='all'||r.dataset.park===park)?'flex':'none';
+  document.querySelectorAll('#rl .ride-row').forEach(row=>{
+    row.style.display=(park==='all'||row.dataset.park===park)?'flex':'none';
   });
 }
 function updateBudget(){
   const inputs=document.querySelectorAll('#tab-bud input[type=number]');
-  let total=0;inputs.forEach(i=>total+=parseFloat(i.value)||0);
-  const rem=9000-total;
+  let total=0;
+  inputs.forEach(input=>total+=parseFloat(input.value)||0);
+  const remaining=9000-total;
   document.getElementById('ts').textContent='$'+Math.round(total).toLocaleString();
-  const re=document.getElementById('rem');
-  re.textContent='$'+Math.round(rem).toLocaleString();
-  re.style.color=rem<0?'var(--red-mid)':rem<300?'var(--amber-mid)':'var(--green-mid)';
+  const remEl=document.getElementById('rem');
+  if(!remEl)return;
+  remEl.textContent='$'+Math.round(remaining).toLocaleString();
+  remEl.style.color=remaining<0?'var(--red-mid)':remaining<300?'var(--amber-mid)':'var(--green-mid)';
 }
 function tp(item){
   item.classList.toggle('packed');
@@ -738,8 +740,8 @@ function initCountdown(){
   document.getElementById('dtg').textContent=days>0?days:'0';
   document.getElementById('cd-pill').textContent=days>0?days+' days to go':'Trip time!';
 }
-const allItems=document.querySelectorAll('.pi').length;
-document.getElementById('plbl').textContent='0 of '+allItems+' items packed';
+const totalPackItems=document.querySelectorAll('.pi').length;
+document.getElementById('plbl').textContent='0 of '+totalPackItems+' items packed';
 initCountdown();
 
 // ─── Weather code helpers ─────────────────────────────────
@@ -799,14 +801,14 @@ function matchRide(rideName, rideKey){
   return RIDE_KEYWORDS[rideKey]?.some(k=>n.includes(k));
 }
 
-let liveWaitData={};
+let hasLiveData=false;
 
 // ─── Set loading state ────────────────────────────────────
 function setLoading(on){
-  ['live-dot','live-dot2','live-dot3'].forEach(id=>{
+  ['live-dot','live-dot2'].forEach(id=>{
     const el=document.getElementById(id);
     if(!el)return;
-    el.className='live-dot'+(on?' loading':liveWaitData.loaded?' live':'');
+    el.className='live-dot'+(on?' loading':hasLiveData?' live':'');
   });
   const btn=document.getElementById('live-btn');
   const lbl=document.getElementById('live-btn-lbl');
@@ -821,7 +823,7 @@ async function fetchAllLiveData(){
   setLoading(true);
   try{
     await Promise.all([fetchWeather(),fetchWaits()]);
-    liveWaitData.loaded=true;
+    hasLiveData=true;
     const now=new Date();
     const timeStr=now.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
     document.getElementById('last-updated-lbl').textContent='Updated '+timeStr;
@@ -836,15 +838,16 @@ async function fetchAllLiveData(){
 // ─── Weather fetch (open-meteo, no key needed) ────────────
 async function fetchWeather(){
   const url='https://api.open-meteo.com/v1/forecast?latitude=28.3772&longitude=-81.5707&current=temperature_2m,weathercode,windspeed_10m,relative_humidity_2m&daily=temperature_2m_max,temperature_2m_min,weathercode,precipitation_probability_max&temperature_unit=fahrenheit&windspeed_unit=mph&timezone=America%2FNew_York&forecast_days=7';
-  const r=await fetch(url);
-  if(!r.ok)throw new Error('Weather fetch failed');
-  const d=await r.json();
-  renderWeather(d);
+  const response=await fetch(url);
+  if(!response.ok)throw new Error('Weather fetch failed');
+  const data=await response.json();
+  renderWeather(data);
 }
 
-function renderWeather(d){
-  const cur=d.current;
-  const daily=d.daily;
+function renderWeather(data){
+  const cur=data.current;
+  const daily=data.daily;
+  if(!cur||!daily)return;
   const temp=Math.round(cur.temperature_2m);
   const icon=wmoIcon(cur.weathercode);
   const cond=wmoText(cur.weathercode);
@@ -880,11 +883,11 @@ function renderWeather(d){
   const hasTripData=tripDates.some(td=>forecastDates.includes(td));
 
   if(hasTripData){
-    wgrid.innerHTML='';
+    let cardsHTML='';
     tripDates.forEach((td,i)=>{
       const idx=forecastDates.indexOf(td);
       if(idx===-1){
-        wgrid.innerHTML+=`<div class="wc"><div class="wdate">${dayNames[i]}</div><div style="font-size:11px;color:var(--text3)">Not in range</div></div>`;
+        cardsHTML+=`<div class="wc"><div class="wdate">${dayNames[i]}</div><div style="font-size:11px;color:var(--text3)">Not in range</div></div>`;
         return;
       }
       const hi=Math.round(daily.temperature_2m_max[idx]);
@@ -892,7 +895,7 @@ function renderWeather(d){
       const wc=daily.weathercode[idx];
       const precip=daily.precipitation_probability_max[idx];
       const condColor=precip>50?'color:var(--amber-mid)':'';
-      wgrid.innerHTML+=`<div class="wc live-data">
+      cardsHTML+=`<div class="wc live-data">
         <div class="wdate">${dayNames[i]}</div>
         <span class="wicon">${wmoIcon(wc)}</span>
         <div class="whi">${hi}°F</div>
@@ -900,6 +903,7 @@ function renderWeather(d){
         <div class="wcond" style="${condColor}">${wmoText(wc)}${precip>30?' · '+precip+'% rain':''}</div>
       </div>`;
     });
+    wgrid.innerHTML=cardsHTML;
   }
 
   // Also update Live tab weather
@@ -925,74 +929,73 @@ function renderWeather(d){
 async function fetchWaits(){
   const parkKeys=Object.keys(PARKS);
   const results=await Promise.allSettled(
-    parkKeys.map(k=>
-      fetch(`https://api.themeparks.wiki/v1/entity/${PARKS[k].id}/live`)
-        .then(r=>{if(!r.ok)throw new Error('HTTP '+r.status);return r.json();})
-        .then(d=>({key:k,data:d}))
+    parkKeys.map(key=>
+      fetch(`https://api.themeparks.wiki/v1/entity/${PARKS[key].id}/live`)
+        .then(res=>{if(!res.ok)throw new Error('HTTP '+res.status);return res.json();})
+        .then(json=>({key,data:json}))
     )
   );
 
   const container=document.getElementById('lv-waits');
-  container.innerHTML='<div class="park-grid"></div>';
-  const grid=container.querySelector('.park-grid');
   const note=document.getElementById('wait-time-note');
   note.textContent='As of right now · data: themeparks.wiki';
 
+  let gridHTML='';
   results.forEach((res,i)=>{
     const key=parkKeys[i];
     const parkName=PARKS[key].name;
 
     if(res.status==='rejected'){
-      grid.innerHTML+=`<div class="park-card">
+      gridHTML+=`<div class="park-card">
         <div class="park-card-hdr"><div class="park-card-name">${parkName}</div><div class="park-card-status park-closed">Error</div></div>
         <div class="live-error" style="margin:.5rem">Could not load data. API may be unavailable.</div>
       </div>`;
       return;
     }
 
-    const d=res.value.data;
-    const lives=d.liveData||[];
+    const parkData=res.value.data;
+    const liveEntries=parkData.liveData||[];
 
     // Filter to OPERATING attractions with wait times
-    const rides=lives
-      .filter(e=>e.entityType==='ATTRACTION'&&e.status==='OPERATING'&&e.queue?.STANDBY?.waitTime!=null)
+    const rides=liveEntries
+      .filter(entry=>entry.entityType==='ATTRACTION'&&entry.status==='OPERATING'&&entry.queue?.STANDBY?.waitTime!=null)
       .sort((a,b)=>(b.queue.STANDBY.waitTime||0)-(a.queue.STANDBY.waitTime||0))
       .slice(0,8);
 
-    const isOpen=lives.some(e=>e.status==='OPERATING');
+    const isOpen=liveEntries.some(entry=>entry.status==='OPERATING');
     const statusClass=isOpen?'park-open':'park-closed';
     const statusText=isOpen?'Open now':'Closed';
 
     // Check for park hours
     let hoursHTML='';
-    const parkEntry=d.liveData?.find(e=>e.entityType==='PARK');
+    const parkEntry=parkData.liveData?.find(entry=>entry.entityType==='PARK');
     if(parkEntry?.operatingHours?.length){
-      const h=parkEntry.operatingHours[0];
-      hoursHTML=`<div class="park-hours">${h.type}: ${fmtTime(h.openingTime)} – ${fmtTime(h.closingTime)}</div>`;
+      const hours=parkEntry.operatingHours[0];
+      hoursHTML=`<div class="park-hours">${hours.type}: ${fmtTime(hours.openingTime)} – ${fmtTime(hours.closingTime)}</div>`;
     }
 
     let ridesHTML='';
     if(rides.length===0){
       ridesHTML=`<div style="padding:.75rem 1rem;font-size:12px;color:var(--text3)">${isOpen?'No wait times available':'Park is closed or pre-trip'}</div>`;
     }else{
-      rides.forEach(r=>{
-        const wait=r.queue.STANDBY.waitTime;
-        const max=120;
-        const pct=Math.min(100,Math.round(wait/max*100));
+      rides.forEach(ride=>{
+        const wait=ride.queue.STANDBY.waitTime;
+        const maxWait=120;
+        const pct=Math.min(100,Math.round(wait/maxWait*100));
         const cls=wait<=20?'wait-low':wait<=45?'wait-med':'wait-high';
         const barColor=wait<=20?'var(--green-mid)':wait<=45?'var(--amber-mid)':'var(--red-mid)';
         ridesHTML+=`<div class="wait-item">
-          <div class="wait-name" title="${r.name}">${r.name}</div>
+          <div class="wait-name" title="${ride.name}">${ride.name}</div>
           <div class="wait-bar"><div class="wait-bar-fill" style="width:${pct}%;background:${barColor}"></div></div>
           <div class="wait-time ${cls}">${wait} min</div>
         </div>`;
 
         // Update rides tab
-        updateRideWait(key, r.name, wait);
+        updateRideWait(key, ride.name, wait);
       });
     }
 
-    grid.innerHTML+=`<div class="park-card">
+    gridHTML+=`<div class="park-card">
       <div class="park-card-hdr">
         <div class="park-card-name">${parkName}</div>
         <div class="park-card-status ${statusClass}">${statusText}</div>
@@ -1001,6 +1004,7 @@ async function fetchWaits(){
       <div class="wait-list">${ridesHTML}</div>
     </div>`;
   });
+  container.innerHTML='<div class="park-grid">'+gridHTML+'</div>';
 }
 
 function fmtTime(iso){
@@ -1011,19 +1015,15 @@ function fmtTime(iso){
 }
 
 function updateRideWait(parkKey, rideName, wait){
-  const rideKeys=Object.keys(RIDE_KEYWORDS);
-  rideKeys.forEach(rk=>{
-    // Only match if the park aligns
-    const rows=document.querySelectorAll(`#rl .ride-row[data-park="${parkKey}"]`);
-    rows.forEach(row=>{
-      if(matchRide(rideName, rk) && row.dataset.rideId===rk){
-        const badge=row.querySelector('.wait-inline');
-        if(badge){
-          badge.textContent=wait+' min';
-          badge.className='wait-inline '+(wait<=20?'wi-low':wait<=45?'wi-med':'wi-high');
-        }
-      }
-    });
+  const rows=document.querySelectorAll(`#rl .ride-row[data-park="${parkKey}"]`);
+  rows.forEach(row=>{
+    const rideId=row.dataset.rideId;
+    if(!rideId||!matchRide(rideName, rideId))return;
+    const badge=row.querySelector('.wait-inline');
+    if(badge){
+      badge.textContent=wait+' min';
+      badge.className='wait-inline '+(wait<=20?'wi-low':wait<=45?'wi-med':'wi-high');
+    }
   });
 }
 </script>
