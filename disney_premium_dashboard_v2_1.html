@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Disney World 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f5f3ef;
+  --surface:#fff;
+  --surface2:#ede9e1;
+  --border:rgba(0,0,0,0.09);
+  --border2:rgba(0,0,0,0.16);
+  --text:#18180f;
+  --text2:#66655e;
+  --text3:#9a9990;
+  --blue-bg:#e4effa;
+  --blue-text:#0b3f73;
+  --blue-mid:#1558a0;
+  --green-bg:#e6f2da;
+  --green-text:#234808;
+  --green-mid:#356510;
+  --amber-bg:#faebd6;
+  --amber-text:#5e3205;
+  --amber-mid:#7d4a09;
+  --red-bg:#fce8e8;
+  --red-text:#741c1c;
+  --red-mid:#9b2828;
+  --purple-bg:#ebebfd;
+  --purple-text:#38328a;
+  --pink-bg:#faebf0;
+  --pink-text:#6b2038;
+  --pink-mid:#8f2f4f;
+  --r:10px;
+  --rl:14px;
+  --live-green:#2a7a3b;
+  --live-bg:#e8f5ec;
+  --shadow:0 1px 3px rgba(0,0,0,0.06),0 4px 12px rgba(0,0,0,0.04);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{background:var(--bg);font-family:'DM Sans',sans-serif;color:var(--text)}
+
+.wrap{max-width:900px;margin:0 auto;background:var(--bg);border-radius:var(--rl);overflow:hidden;border:0.5px solid var(--border);box-shadow:0 8px 40px rgba(0,0,0,0.07)}
+
+.hdr{background:var(--surface);border-bottom:0.5px solid var(--border);padding:1.1rem 1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.hdr-left h1{font-family:'DM Serif Display',serif;font-size:20px;font-weight:400;letter-spacing:-0.3px;line-height:1.2}
+.hdr-left p{font-size:12px;color:var(--text2);margin-top:3px}
+.hdr-right{display:flex;align-items:center;gap:8px}
+
+.pill{background:var(--blue-bg);color:var(--blue-text);font-size:11px;font-weight:600;padding:4px 12px;border-radius:20px;white-space:nowrap}
+
+.live-btn{display:flex;align-items:center;gap:6px;background:var(--surface);border:0.5px solid var(--border2);border-radius:20px;padding:5px 12px 5px 8px;font-size:11px;font-weight:600;color:var(--text2);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s;white-space:nowrap}
+.live-btn:hover{background:var(--surface2);color:var(--text)}
+.live-btn.loading{pointer-events:none;opacity:.7}
+.live-dot{width:7px;height:7px;border-radius:50%;background:#ccc;flex-shrink:0;transition:background .3s}
+.live-dot.live{background:var(--live-green);animation:pulse 2s infinite}
+.live-dot.loading{background:var(--amber-mid);animation:spin-fade 1s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+@keyframes spin-fade{0%,100%{opacity:1}50%{opacity:.3}}
+
+.last-updated{font-size:10px;color:var(--text3);white-space:nowrap}
+
+.nav-wrap{background:var(--surface);border-bottom:0.5px solid var(--border);padding:0 1.5rem;overflow-x:auto;scrollbar-width:none}
+.nav-wrap::-webkit-scrollbar{display:none}
+.nav{display:flex;gap:0;white-space:nowrap}
+.ntab{font-size:12px;padding:11px 13px;border-bottom:2px solid transparent;color:var(--text2);cursor:pointer;background:none;border-top:none;border-left:none;border-right:none;font-weight:500;font-family:'DM Sans',sans-serif;transition:color .15s;position:relative}
+.ntab:hover{color:var(--text)}
+.ntab.active{color:var(--text);border-bottom-color:var(--text)}
+.ntab .live-badge{position:absolute;top:7px;right:4px;width:5px;height:5px;background:var(--live-green);border-radius:50%;animation:pulse 2s infinite;display:none}
+.ntab .live-badge.show{display:block}
+
+.body{padding:1.25rem 1.5rem}
+.tab{display:none;animation:fadeIn .2s ease}.tab.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:translateY(0)}}
+
+.mgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;margin-bottom:1.25rem}
+.met{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--rl);padding:.85rem 1rem;box-shadow:var(--shadow)}
+.ml{font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;margin-bottom:5px}
+.mv{font-size:20px;font-weight:700;letter-spacing:-.5px;font-family:'DM Serif Display',serif}
+.ms{font-size:11px;color:var(--text2);margin-top:2px}
+
+.sec{font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin:1.25rem 0 .6rem}
+.sec:first-child{margin-top:0}
+
+.card{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--rl);padding:1rem 1.1rem;margin-bottom:10px;box-shadow:var(--shadow)}
+
+.row{display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:0.5px solid var(--border);gap:10px}
+.row:last-child{border-bottom:none;padding-bottom:0}
+.rl{font-size:13px;font-weight:500}
+.rs{font-size:11px;color:var(--text2);margin-top:2px}
+
+.badge{font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;white-space:nowrap}
+.bg{background:var(--green-bg);color:var(--green-text)}
+.ba{background:var(--amber-bg);color:var(--amber-text)}
+.bb{background:var(--blue-bg);color:var(--blue-text)}
+.br{background:var(--red-bg);color:var(--red-text)}
+.bp{background:var(--pink-bg);color:var(--pink-text)}
+.bpu{background:var(--purple-bg);color:var(--purple-text)}
+
+/* LIVE TAB */
+.live-section{margin-bottom:1.25rem}
+.live-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:.6rem}
+.live-header-title{font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;display:flex;align-items:center;gap:6px}
+.live-stale{font-size:10px;color:var(--text3)}
+
+.park-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px}
+.park-card{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--rl);overflow:hidden;box-shadow:var(--shadow)}
+.park-card-hdr{padding:.75rem 1rem .6rem;border-bottom:0.5px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.park-card-name{font-size:13px;font-weight:600}
+.park-card-status{font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px}
+.park-open{background:var(--green-bg);color:var(--green-text)}
+.park-closed{background:var(--surface2);color:var(--text3)}
+.park-hours{font-size:10px;color:var(--text3);padding:.35rem 1rem .5rem;border-bottom:0.5px solid var(--border)}
+.wait-list{padding:.4rem 0}
+.wait-item{display:flex;align-items:center;justify-content:space-between;padding:5px 1rem;gap:8px}
+.wait-item:hover{background:var(--surface2)}
+.wait-name{font-size:12px;color:var(--text);font-weight:500;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.wait-time{font-size:12px;font-weight:700;white-space:nowrap;min-width:48px;text-align:right}
+.wait-low{color:var(--green-mid)}
+.wait-med{color:var(--amber-mid)}
+.wait-high{color:var(--red-mid)}
+.wait-bar{width:60px;height:4px;background:var(--surface2);border-radius:2px;overflow:hidden;flex-shrink:0}
+.wait-bar-fill{height:4px;border-radius:2px;transition:width .5s ease}
+.wait-down{color:var(--text3);font-style:italic}
+
+.skeleton{background:linear-gradient(90deg,var(--surface2) 25%,var(--bg) 50%,var(--surface2) 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;border-radius:4px;height:12px;margin:5px 1rem}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+/* WEATHER live */
+.wgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:1.25rem}
+.wc{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--rl);padding:.85rem;text-align:center;box-shadow:var(--shadow);transition:border-color .3s}
+.wc.live-data{border-color:var(--live-green);border-width:1.5px}
+.wdate{font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.04em;margin-bottom:5px}
+.whi{font-size:22px;font-weight:700;letter-spacing:-.5px;font-family:'DM Serif Display',serif}
+.wlo,.wcond{font-size:11px;color:var(--text2)}
+.wcond{margin-top:3px}
+.wicon{font-size:20px;display:block;margin:3px 0}
+
+/* Current conditions bar */
+.current-weather{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--rl);padding:.85rem 1.1rem;margin-bottom:10px;display:flex;align-items:center;gap:12px;box-shadow:var(--shadow);flex-wrap:wrap}
+.cw-icon{font-size:32px;flex-shrink:0}
+.cw-temp{font-size:28px;font-weight:700;letter-spacing:-.5px;font-family:'DM Serif Display',serif}
+.cw-cond{font-size:12px;color:var(--text2);margin-top:1px}
+.cw-details{display:flex;gap:12px;margin-top:4px;flex-wrap:wrap}
+.cw-detail{font-size:11px;color:var(--text2)}
+.cw-detail span{font-weight:600;color:var(--text)}
+
+/* Day plans / other tabs preserved */
+.ftabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1rem}
+.ftab{font-size:11px;padding:5px 12px;border-radius:20px;border:0.5px solid var(--border2);background:var(--surface);color:var(--text2);cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:500;transition:all .15s}
+.ftab:hover{background:var(--surface2)}
+.ftab.active{background:var(--text);color:var(--bg);border-color:var(--text)}
+
+.tl-item{display:flex;gap:12px;padding:9px 0;border-bottom:0.5px solid var(--border)}
+.tl-item:last-child{border-bottom:none}
+.tl-item.hl{background:var(--pink-bg);margin:3px -8px;padding:10px 8px;border-radius:var(--r);border:0.5px solid var(--pink-mid)}
+.ttime{font-size:10px;font-weight:700;color:var(--text3);min-width:62px;padding-top:3px}
+.ttitle{font-size:12px;font-weight:600;color:var(--text);line-height:1.4}
+.tnote{font-size:11px;color:var(--text2);margin-top:2px;line-height:1.5}
+.tmagic{font-size:11px;color:var(--pink-mid);margin-top:2px;font-weight:500}
+.tfood{font-size:11px;color:var(--green-mid);margin-top:2px}
+
+.ride-row{display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:0.5px solid var(--border);gap:10px}
+.ride-row:last-child{border-bottom:none}
+.rname{font-size:13px;font-weight:500}
+.rpark{font-size:11px;color:var(--text2)}
+.wait-inline{font-size:12px;font-weight:700;padding:2px 8px;border-radius:12px;white-space:nowrap}
+.wi-low{background:var(--green-bg);color:var(--green-text)}
+.wi-med{background:var(--amber-bg);color:var(--amber-text)}
+.wi-high{background:var(--red-bg);color:var(--red-text)}
+.wi-na{background:var(--surface2);color:var(--text3)}
+
+.bbb-block{border:1.5px solid var(--pink-mid);border-radius:var(--rl);padding:1rem 1.1rem;margin-bottom:10px;background:var(--surface)}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:8px;margin-bottom:10px}
+.pc{background:var(--pink-bg);border-radius:var(--r);padding:.85rem 1rem}
+.pname{font-size:13px;font-weight:700;color:var(--pink-text);margin-bottom:3px;font-family:'DM Serif Display',serif}
+.pdesc{font-size:11px;color:var(--pink-text);opacity:.8;line-height:1.5}
+
+.fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:8px;margin-bottom:10px}
+.fc2{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--rl);overflow:hidden;box-shadow:var(--shadow)}
+.fimg{height:70px;display:flex;align-items:center;justify-content:center;font-size:28px}
+.fbody{padding:.75rem .9rem}
+.ftag{font-size:10px;color:var(--text3);font-weight:600;margin-bottom:3px;text-transform:uppercase;letter-spacing:.04em}
+.fname{font-size:13px;font-weight:700;margin-bottom:3px;font-family:'DM Serif Display',serif}
+.fdesc{font-size:11px;color:var(--text2);line-height:1.5;margin-bottom:5px}
+.fprice{font-size:11px;font-weight:700;color:var(--green-mid)}
+
+.tgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:8px}
+.tc{background:var(--surface2);border-radius:var(--r);padding:.85rem .9rem}
+.twho{font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.04em;margin-bottom:3px}
+.tname{font-size:13px;font-weight:600;margin-bottom:2px}
+.twhere{font-size:11px;color:var(--text2)}
+.tprice{font-size:11px;font-weight:700;color:var(--amber-mid);margin-top:3px}
+
+.pack-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.pack-card{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--rl);padding:.9rem 1rem;box-shadow:var(--shadow)}
+.pack-title{font-size:11px;font-weight:700;color:var(--text2);margin-bottom:9px;padding-bottom:8px;border-bottom:0.5px solid var(--border);text-transform:uppercase;letter-spacing:.05em}
+.pi{display:flex;align-items:flex-start;gap:9px;padding:5px 0;border-bottom:0.5px solid var(--border);cursor:pointer;user-select:none}
+.pi:last-child{border-bottom:none}
+.pck{width:15px;min-width:15px;height:15px;border:1.5px solid var(--border2);border-radius:3px;margin-top:2px;display:flex;align-items:center;justify-content:center;transition:all .15s;flex-shrink:0}
+.pck.done{background:var(--green-mid);border-color:var(--green-mid)}
+.pck.done::after{content:'✓';font-size:9px;color:#fff;font-weight:700}
+.ptxt{font-size:12px;line-height:1.5;font-weight:500}
+.pnote{font-size:10px;color:var(--text3);margin-top:1px}
+.pi.packed .ptxt{color:var(--text3);text-decoration:line-through}
+
+.prog-wrap{margin-bottom:1.25rem}
+.prog-lbl{font-size:12px;color:var(--text2);margin-bottom:5px}
+.prog-bar{height:5px;background:var(--surface2);border-radius:3px;overflow:hidden}
+.prog-fill{height:5px;background:var(--green-mid);border-radius:3px;transition:width .4s}
+
+.bbar{height:28px;border-radius:var(--r);overflow:hidden;display:flex;margin:8px 0}
+.bseg{height:28px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.bslbl{font-size:9px;font-weight:700;color:#fff;white-space:nowrap;padding:0 3px}
+.blegend{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.bdot{width:9px;height:9px;border-radius:2px;display:inline-block;margin-right:4px;vertical-align:middle}
+.blegend span{font-size:11px;color:var(--text2)}
+.tot{display:flex;justify-content:space-between;align-items:center;padding-top:12px;margin-top:6px;border-top:1.5px solid var(--border2);flex-wrap:wrap;gap:8px}
+.tot-lbl{font-size:11px;color:var(--text2);margin-bottom:2px}
+.tot-val{font-size:22px;font-weight:700;letter-spacing:-.5px;font-family:'DM Serif Display',serif}
+
+.tracker-row{display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:0.5px solid var(--border);gap:10px}
+.tracker-row:last-child{border-bottom:none}
+.tracker-row.bbb{background:var(--pink-bg);margin:2px -6px;padding:9px 6px;border-radius:var(--r);border:0.5px solid var(--pink-mid)}
+.trlbl{font-size:13px;font-weight:500}
+.trsub{font-size:11px;color:var(--text2);margin-top:1px}
+.tr-inp{display:flex;align-items:center;gap:4px;flex-shrink:0}
+.tr-inp span{font-size:12px;color:var(--text2)}
+.tr-inp input{width:75px;font-size:13px;font-weight:600;padding:5px 7px;border-radius:var(--r);border:0.5px solid var(--border2);background:var(--surface);color:var(--text);text-align:right;font-family:'DM Sans',sans-serif}
+
+.aoa-row{display:flex;gap:12px;padding:9px 0;border-bottom:0.5px solid var(--border)}
+.aoa-row:last-child{border-bottom:none}
+.aoa-lbl{font-size:13px;font-weight:500;min-width:140px}
+.aoa-val{font-size:12px;color:var(--text2);flex:1;line-height:1.5}
+.resort-hero{height:90px;background:linear-gradient(135deg,#0b3f6e,#1558a0);border-radius:var(--rl);display:flex;align-items:center;justify-content:center;margin-bottom:12px}
+.resort-hero span{font-family:'DM Serif Display',serif;font-size:16px;font-weight:400;color:#fff;letter-spacing:-.2px}
+
+.party-block{border:1.5px solid var(--blue-mid);border-radius:var(--rl);padding:1rem 1.1rem;margin-bottom:10px;background:var(--surface)}
+
+/* Error / status states */
+.live-error{font-size:11px;color:var(--red-mid);padding:8px 1rem;background:var(--red-bg);border-radius:var(--r);margin:4px 0}
+.live-notice{background:var(--live-bg);color:var(--live-green);font-size:11px;font-weight:600;padding:6px 10px;border-radius:var(--r);display:inline-flex;align-items:center;gap:5px}
+
+/* Crowd bar indicator */
+.crowd-row{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:0.5px solid var(--border)}
+.crowd-row:last-child{border-bottom:none}
+.crowd-name{font-size:12px;font-weight:500;min-width:130px}
+.crowd-bar-wrap{flex:1;height:7px;background:var(--surface2);border-radius:4px;overflow:hidden}
+.crowd-fill{height:7px;border-radius:4px}
+.crowd-label{font-size:11px;font-weight:700;min-width:65px;text-align:right}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hdr">
+    <div class="hdr-left">
+      <h1>Disney World 2026</h1>
+      <p>Oct 7–12 &nbsp;·&nbsp; Family of 4 &nbsp;·&nbsp; Art of Animation &nbsp;·&nbsp; $9,000 budget</p>
+    </div>
+    <div class="hdr-right">
+      <span class="last-updated" id="last-updated-lbl"></span>
+      <button class="live-btn" id="live-btn" onclick="fetchAllLiveData()">
+        <span class="live-dot" id="live-dot"></span>
+        <span id="live-btn-lbl">Get live data</span>
+      </button>
+      <div class="pill" id="cd-pill">Loading…</div>
+    </div>
+  </div>
+  <div class="nav-wrap">
+    <div class="nav">
+      <button class="ntab active" onclick="showTab('ov',this)">Overview</button>
+      <button class="ntab" onclick="showTab('lv',this)">🔴 Live <span class="live-badge" id="lv-badge"></span></button>
+      <button class="ntab" onclick="showTab('bud',this)">Budget</button>
+      <button class="ntab" onclick="showTab('fl',this)">Flights</button>
+      <button class="ntab" onclick="showTab('dp',this)">Day plans</button>
+      <button class="ntab" onclick="showTab('rd',this)">Rides</button>
+      <button class="ntab" onclick="showTab('fd',this)">Food</button>
+      <button class="ntab" onclick="showTab('bb',this)">BBB Princess</button>
+      <button class="ntab" onclick="showTab('pt',this)">MNSSHP</button>
+      <button class="ntab" onclick="showTab('rs',this)">Resort</button>
+      <button class="ntab" onclick="showTab('ty',this)">Toys</button>
+      <button class="ntab" onclick="showTab('pk',this)">Packing</button>
+    </div>
+  </div>
+  <div class="body">
+
+    <!-- OVERVIEW -->
+    <div id="tab-ov" class="tab active">
+      <div class="mgrid">
+        <div class="met"><div class="ml">Budget</div><div class="mv">$9,000</div><div class="ms">full trip</div></div>
+        <div class="met"><div class="ml">Fixed costs</div><div class="mv">$6,300</div><div class="ms">flights+hotel+tickets</div></div>
+        <div class="met"><div class="ml">BBB · 2 girls</div><div class="mv">$400</div><div class="ms">Castle pkg Oct 8</div></div>
+        <div class="met"><div class="ml">Days to go</div><div class="mv" id="dtg">—</div><div class="ms">departs Oct 7</div></div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
+        <div class="sec" style="margin:0">Weather · Orlando Oct 8–11</div>
+        <div id="weather-live-badge" style="display:none"><span class="live-notice"><span style="width:6px;height:6px;border-radius:50%;background:var(--live-green);animation:pulse 2s infinite;display:inline-block"></span>Live from Open-Meteo</span></div>
+      </div>
+      <div style="margin-top:.6rem">
+        <div id="current-weather-bar" style="display:none"></div>
+        <div class="wgrid" id="wgrid">
+          <div class="wc"><div class="wdate">Wed Oct 8</div><div class="whi">84°F</div><div class="wlo">Low 68°F</div><div class="wcond">Partly cloudy</div></div>
+          <div class="wc"><div class="wdate">Thu Oct 9</div><div class="whi">86°F</div><div class="wlo">Low 70°F</div><div class="wcond">Sunny</div></div>
+          <div class="wc"><div class="wdate">Fri Oct 10</div><div class="whi">82°F</div><div class="wlo">Low 69°F</div><div class="wcond" style="color:var(--amber-mid)">PM storms 2–5 PM</div></div>
+          <div class="wc"><div class="wdate">Sat Oct 11</div><div class="whi">80°F</div><div class="wlo">Low 67°F</div><div class="wcond">Mostly sunny</div></div>
+        </div>
+      </div>
+      <div class="sec">Full trip schedule</div>
+      <div class="card">
+        <div class="row"><div><div class="rl">Oct 7 — Travel day</div><div class="rs">Fly ORD → MCO · check in AoA · pool afternoon</div></div><span class="badge bb">Arrival</span></div>
+        <div class="row"><div><div class="rl">Oct 8 — Magic Kingdom</div><div class="rs">BBB 10:30 AM · Be Our Guest lunch · MNSSHP party night</div></div><span class="badge bp">BBB + Party</span></div>
+        <div class="row"><div><div class="rl">Oct 9 — Hollywood Studios</div><div class="rs">Rise of the Resistance · Slinky Dog · Sci-Fi dinner · Fantasmic</div></div><span class="badge bg">Low crowds</span></div>
+        <div class="row"><div><div class="rl">Oct 10 — Epcot</div><div class="rs">Food & Wine all day · Guardians · Le Cellier dinner · Harmonious</div></div><span class="badge ba">Moderate</span></div>
+        <div class="row"><div><div class="rl">Oct 11 — Animal Kingdom</div><div class="rs">Flight of Passage · Safaris · Satu'li lunch · Lion King show</div></div><span class="badge ba">Busiest</span></div>
+        <div class="row"><div><div class="rl">Oct 12 — Checkout + fly home</div><div class="rs">Morning pool · MCO → ORD 3 PM</div></div><span class="badge bb">Departure</span></div>
+      </div>
+      <div class="sec">Book on Aug 9 at 7 AM sharp</div>
+      <div class="card">
+        <div class="row"><div><div class="rl">Bibbidi Bobbidi Boutique · Oct 8</div><div class="rs">60-day window — castle slots go in minutes</div></div><span class="badge br">Critical</span></div>
+        <div class="row"><div><div class="rl">Be Our Guest lunch · Oct 8</div><div class="rs">Right after BBB booking at 7 AM</div></div><span class="badge br">Critical</span></div>
+        <div class="row"><div><div class="rl">Le Cellier Steakhouse · Oct 10</div><div class="rs">Hardest Epcot reservation — fills in minutes</div></div><span class="badge br">Critical</span></div>
+        <div class="row"><div><div class="rl">Sci-Fi Dine-In Theater · Oct 9</div><div class="rs">Popular — book same morning</div></div><span class="badge ba">Important</span></div>
+        <div class="row"><div><div class="rl">MNSSHP party tickets</div><div class="rs">Oct dates sell out months ahead — buy today</div></div><span class="badge br">Buy now</span></div>
+      </div>
+    </div>
+
+    <!-- LIVE DATA TAB -->
+    <div id="tab-lv" class="tab">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:8px">
+        <div>
+          <div style="font-family:'DM Serif Display',serif;font-size:18px;font-weight:400">Live Park Data</div>
+          <div style="font-size:12px;color:var(--text2);margin-top:2px">Real-time ride wait times + current Orlando weather</div>
+        </div>
+        <button class="live-btn" onclick="fetchAllLiveData()" style="padding:7px 16px 7px 12px;font-size:12px">
+          <span class="live-dot" id="live-dot2"></span>
+          <span id="live-btn2-lbl">Refresh</span>
+        </button>
+      </div>
+
+      <!-- Current weather big card -->
+      <div class="sec">Current conditions · Orlando, FL</div>
+      <div id="lv-weather">
+        <div class="card" style="text-align:center;padding:1.5rem;color:var(--text3)">
+          <div style="font-size:13px">Press <strong>Refresh</strong> to load live weather</div>
+        </div>
+      </div>
+
+      <!-- Wait times per park -->
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
+        <div class="sec" style="margin-bottom:0">Live wait times · Walt Disney World</div>
+        <div id="wait-time-note" style="font-size:10px;color:var(--text3)"></div>
+      </div>
+      <div style="margin-top:.6rem" id="lv-waits">
+        <div class="park-grid">
+          <div class="park-card"><div class="park-card-hdr"><div class="park-card-name">Magic Kingdom</div><div class="park-card-status park-closed">Not loaded</div></div><div class="skeleton"></div><div class="skeleton" style="width:70%"></div><div class="skeleton" style="width:85%"></div><div style="height:4px"></div></div>
+          <div class="park-card"><div class="park-card-hdr"><div class="park-card-name">Epcot</div><div class="park-card-status park-closed">Not loaded</div></div><div class="skeleton"></div><div class="skeleton" style="width:80%"></div><div class="skeleton" style="width:60%"></div><div style="height:4px"></div></div>
+          <div class="park-card"><div class="park-card-hdr"><div class="park-card-name">Hollywood Studios</div><div class="park-card-status park-closed">Not loaded</div></div><div class="skeleton"></div><div class="skeleton" style="width:75%"></div><div class="skeleton" style="width:90%"></div><div style="height:4px"></div></div>
+          <div class="park-card"><div class="park-card-hdr"><div class="park-card-name">Animal Kingdom</div><div class="park-card-status park-closed">Not loaded</div></div><div class="skeleton"></div><div class="skeleton" style="width:65%"></div><div class="skeleton" style="width:80%"></div><div style="height:4px"></div></div>
+        </div>
+      </div>
+
+      <div class="sec">Crowd history · October week averages</div>
+      <div class="card">
+        <div class="crowd-row"><div class="crowd-name">Magic Kingdom</div><div class="crowd-bar-wrap"><div class="crowd-fill" style="width:72%;background:var(--amber-mid)"></div></div><div class="crowd-label" style="color:var(--amber-mid)">Moderate</div></div>
+        <div class="crowd-row"><div class="crowd-name">Hollywood Studios</div><div class="crowd-bar-wrap"><div class="crowd-fill" style="width:45%;background:var(--green-mid)"></div></div><div class="crowd-label" style="color:var(--green-mid)">Lower</div></div>
+        <div class="crowd-row"><div class="crowd-name">Epcot (F&W)</div><div class="crowd-bar-wrap"><div class="crowd-fill" style="width:78%;background:var(--amber-mid)"></div></div><div class="crowd-label" style="color:var(--amber-mid)">Moderate</div></div>
+        <div class="crowd-row"><div class="crowd-name">Animal Kingdom</div><div class="crowd-bar-wrap"><div class="crowd-fill" style="width:85%;background:var(--red-mid)"></div></div><div class="crowd-label" style="color:var(--red-mid)">Busiest</div></div>
+      </div>
+      <div style="font-size:10px;color:var(--text3);margin-top:-4px;margin-bottom:1rem">Wait time data via themeparks.wiki · Weather via open-meteo.com · No API key required</div>
+    </div>
+
+    <!-- BUDGET -->
+    <div id="tab-bud" class="tab">
+      <div class="sec">Visual budget split</div>
+      <div class="bbar">
+        <div class="bseg" style="width:14.1%;background:#1558a0"><span class="bslbl">Flights</span></div>
+        <div class="bseg" style="width:20.1%;background:#356510"><span class="bslbl">Tickets</span></div>
+        <div class="bseg" style="width:5.7%;background:#4e45b0"><span class="bslbl">Party</span></div>
+        <div class="bseg" style="width:24.4%;background:#0d6350"><span class="bslbl">Resort</span></div>
+        <div class="bseg" style="width:4.4%;background:#8f2f4f"><span class="bslbl">BBB</span></div>
+        <div class="bseg" style="width:12%;background:#b06f12"><span class="bslbl">Food</span></div>
+        <div class="bseg" style="width:6%;background:#8f3018"><span class="bslbl">Toys</span></div>
+        <div class="bseg" style="width:6.2%;background:#818178"><span class="bslbl">LL</span></div>
+        <div class="bseg" style="width:7.1%;background:#8ab84e"><span class="bslbl">Buffer</span></div>
+      </div>
+      <div class="blegend">
+        <span><span class="bdot" style="background:#1558a0"></span>Flights $1,272</span>
+        <span><span class="bdot" style="background:#356510"></span>Tickets $1,812</span>
+        <span><span class="bdot" style="background:#4e45b0"></span>Party $516</span>
+        <span><span class="bdot" style="background:#0d6350"></span>Resort $2,200</span>
+        <span><span class="bdot" style="background:#8f2f4f"></span>BBB $400</span>
+        <span><span class="bdot" style="background:#b06f12"></span>Food $1,080</span>
+        <span><span class="bdot" style="background:#8f3018"></span>Toys $400</span>
+        <span><span class="bdot" style="background:#818178"></span>Lightning Lane $560</span>
+        <span><span class="bdot" style="background:#8ab84e"></span>Buffer $660</span>
+      </div>
+      <div class="sec">Live budget tracker</div>
+      <div class="card">
+        <div class="tracker-row"><div><div class="trlbl">Flights · United · 4 tickets</div></div><div class="tr-inp"><span>$</span><input type="number" value="1272" min="0" oninput="updateBudget()"></div></div>
+        <div class="tracker-row"><div><div class="trlbl">Park tickets · 4-day base</div></div><div class="tr-inp"><span>$</span><input type="number" value="1812" min="0" oninput="updateBudget()"></div></div>
+        <div class="tracker-row"><div><div class="trlbl">MNSSHP party tickets · Oct 8</div></div><div class="tr-inp"><span>$</span><input type="number" value="516" min="0" oninput="updateBudget()"></div></div>
+        <div class="tracker-row"><div><div class="trlbl">Art of Animation · 5 nights</div></div><div class="tr-inp"><span>$</span><input type="number" value="2200" min="0" oninput="updateBudget()"></div></div>
+        <div class="tracker-row bbb"><div><div class="trlbl">Bibbidi Bobbidi Boutique · 2 girls</div><div class="trsub">Castle package · Oct 8 · inside Cinderella Castle</div></div><div class="tr-inp"><span>$</span><input type="number" value="400" min="0" oninput="updateBudget()"></div></div>
+        <div class="tracker-row"><div><div class="trlbl">Food & dining · all park days</div></div><div class="tr-inp"><span>$</span><input type="number" value="1080" min="0" oninput="updateBudget()"></div></div>
+        <div class="tracker-row"><div><div class="trlbl">Kids toys & souvenirs</div></div><div class="tr-inp"><span>$</span><input type="number" value="400" min="0" oninput="updateBudget()"></div></div>
+        <div class="tracker-row"><div><div class="trlbl">Lightning Lane Multi Pass</div></div><div class="tr-inp"><span>$</span><input type="number" value="560" min="0" oninput="updateBudget()"></div></div>
+        <div class="tracker-row"><div><div class="trlbl">Adult souvenirs & extras</div></div><div class="tr-inp"><span>$</span><input type="number" value="300" min="0" oninput="updateBudget()"></div></div>
+        <div class="tot">
+          <div><div class="tot-lbl">Total spent</div><div class="tot-val" id="ts">$8,548</div></div>
+          <div style="text-align:right"><div class="tot-lbl">Remaining</div><div class="tot-val" id="rem" style="color:var(--green-mid)">$452</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FLIGHTS -->
+    <div id="tab-fl" class="tab">
+      <div style="background:var(--blue-bg);color:var(--blue-text);font-size:12px;font-weight:600;padding:7px 12px;border-radius:var(--r);margin-bottom:1rem">Buy window: late July – early August for best October prices</div>
+      <div class="card" style="border-color:var(--blue-mid);border-width:1.5px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">
+          <div><div style="font-size:14px;font-weight:700">United · ORD → MCO · Oct 7</div><div style="font-size:11px;color:var(--text2);margin-top:2px">Nonstop · ~2h 45m · departs ~8:00 AM</div></div>
+          <div style="text-align:right"><div style="font-size:16px;font-weight:700;font-family:'DM Serif Display',serif">$636 total</div><div style="font-size:11px;color:var(--text2)">~$159/person</div></div>
+        </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap"><span class="badge bg">Nonstop</span><span class="badge bb">Recommended</span><span style="font-size:11px;color:var(--green-mid);font-weight:600">Arrives midday — full afternoon at resort</span></div>
+      </div>
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">
+          <div><div style="font-size:14px;font-weight:700">United · ORD → MCO · Oct 7</div><div style="font-size:11px;color:var(--text2);margin-top:2px">1 stop · ~4h 30m · departs ~6:30 AM</div></div>
+          <div style="text-align:right"><div style="font-size:16px;font-weight:700;font-family:'DM Serif Display',serif">$492 total</div><div style="font-size:11px;color:var(--text2)">~$123/person</div></div>
+        </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap"><span class="badge ba">1 stop</span><span style="font-size:11px;color:var(--amber-mid);font-weight:600">Cheapest — connection risk with kids</span></div>
+      </div>
+      <div class="card" style="border-color:var(--blue-mid);border-width:1.5px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">
+          <div><div style="font-size:14px;font-weight:700">United · MCO → ORD · Oct 12</div><div style="font-size:11px;color:var(--text2);margin-top:2px">Nonstop · ~2h 50m · departs ~3:00 PM</div></div>
+          <div style="text-align:right"><div style="font-size:16px;font-weight:700;font-family:'DM Serif Display',serif">$636 total</div><div style="font-size:11px;color:var(--text2)">~$159/person</div></div>
+        </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap"><span class="badge bg">Nonstop</span><span style="font-size:11px;color:var(--green-mid);font-weight:600">Late departure — morning at resort first</span></div>
+      </div>
+      <div class="sec">Historical price trend · ORD to MCO per person</div>
+      <div class="card">
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:0.5px solid var(--border)"><span style="font-size:11px;color:var(--text2);min-width:110px">Jan–Mar</span><div style="flex:1;height:7px;background:var(--surface2);border-radius:3px;overflow:hidden"><div style="width:45%;height:7px;background:var(--blue-mid);border-radius:3px"></div></div><span style="font-size:12px;font-weight:700;min-width:38px;text-align:right">$185</span><span class="badge bg" style="margin-left:6px">Low</span></div>
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:0.5px solid var(--border)"><span style="font-size:11px;color:var(--text2);min-width:110px">Jun–Jul</span><div style="flex:1;height:7px;background:var(--surface2);border-radius:3px;overflow:hidden"><div style="width:90%;height:7px;background:var(--red-mid);border-radius:3px"></div></div><span style="font-size:12px;font-weight:700;min-width:38px;text-align:right">$350</span><span class="badge br" style="margin-left:6px">Peak</span></div>
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:0.5px solid var(--border)"><span style="font-size:11px;color:var(--text2);min-width:110px">Sep</span><div style="flex:1;height:7px;background:var(--surface2);border-radius:3px;overflow:hidden"><div style="width:38%;height:7px;background:var(--blue-mid);border-radius:3px"></div></div><span style="font-size:12px;font-weight:700;min-width:38px;text-align:right">$175</span><span class="badge bg" style="margin-left:6px">Low</span></div>
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:0.5px solid var(--border)"><span style="font-size:11px;font-weight:700;color:var(--text);min-width:110px">Oct — your trip</span><div style="flex:1;height:7px;background:var(--surface2);border-radius:3px;overflow:hidden"><div style="width:57%;height:7px;background:var(--amber-mid);border-radius:3px"></div></div><span style="font-size:12px;font-weight:700;color:var(--amber-mid);min-width:38px;text-align:right">$235</span><span class="badge ba" style="margin-left:6px">Moderate</span></div>
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 0"><span style="font-size:11px;color:var(--text2);min-width:110px">Nov–Dec</span><div style="flex:1;height:7px;background:var(--surface2);border-radius:3px;overflow:hidden"><div style="width:95%;height:7px;background:var(--red-mid);border-radius:3px"></div></div><span style="font-size:12px;font-weight:700;min-width:38px;text-align:right">$395</span><span class="badge br" style="margin-left:6px">Peak</span></div>
+      </div>
+    </div>
+
+    <!-- DAY PLANS -->
+    <div id="tab-dp" class="tab">
+      <div class="ftabs">
+        <button class="ftab active" onclick="showDay('mk',this)">Oct 8 · Magic Kingdom</button>
+        <button class="ftab" onclick="showDay('hs',this)">Oct 9 · Hollywood Studios</button>
+        <button class="ftab" onclick="showDay('ep',this)">Oct 10 · Epcot</button>
+        <button class="ftab" onclick="showDay('ak',this)">Oct 11 · Animal Kingdom</button>
+      </div>
+      <div id="dmk">
+        <div style="background:var(--pink-bg);color:var(--pink-text);font-size:12px;font-weight:600;padding:7px 12px;border-radius:var(--r);margin-bottom:10px">Magic Kingdom + BBB + MNSSHP · Oct 8 · the biggest day of the trip</div>
+        <div class="card"><div class="tl-item"><span class="ttime">7:30 AM</span><div><div class="ttitle">Early entry — Tron Lightcycle Run</div><div class="tnote">Book on Lightning Lane Multi Pass the night before. Fastest coaster at WDW.</div></div></div><div class="tl-item"><span class="ttime">8:15 AM</span><div><div class="ttitle">Seven Dwarfs Mine Train</div><div class="tnote">Do immediately after Tron while lines are still short. Girls will love it.</div></div></div><div class="tl-item"><span class="ttime">9:00 AM</span><div><div class="ttitle">Haunted Mansion → Big Thunder Mountain</div><div class="tnote">Use LLMP on Haunted Mansion. Two classics done before 10 AM.</div></div></div><div class="tl-item hl"><span class="ttime" style="color:var(--pink-mid)">10:30 AM</span><div><div class="ttitle" style="color:var(--pink-mid)">Bibbidi Bobbidi Boutique · Castle package</div><div class="tnote">60 min · hair, makeup, gown, tiara, wand, PhotoPass photos inside the castle</div><div class="tmagic">This is the memory of the whole trip. Let them each choose their princess.</div></div></div><div class="tl-item"><span class="ttime">12:00 PM</span><div><div class="ttitle">Lunch — Be Our Guest Restaurant</div><div class="tfood">Grey stuff dessert, braised pork, French onion soup · ~$120 · request Rose Gallery room</div></div></div><div class="tl-item"><span class="ttime">1:30 PM</span><div><div class="ttitle">Princess meet & greets — Princess Fairytale Hall</div><div class="tnote">In full BBB gowns, characters spend extra time with them. Don't skip this.</div></div></div><div class="tl-item"><span class="ttime">2:45 PM</span><div><div class="ttitle">Festival of Fantasy Parade</div><div class="tnote">Grab a spot 20 min early. Watching the princess floats in full gowns = pure magic.</div></div></div><div class="tl-item"><span class="ttime">3:30 PM</span><div><div class="ttitle">Resort break — protect the BBB look</div><div class="tnote">No water rides today. Rest before the late party night. Non-negotiable with kids.</div></div></div><div class="tl-item"><span class="ttime">4:00 PM</span><div><div class="ttitle">Re-enter MK with party wristbands</div><div class="tnote">BBB gowns = perfect party costume. Near-zero wait rides before 7 PM.</div></div></div><div class="tl-item"><span class="ttime">6:30 PM</span><div><div class="ttitle">Party dinner — Columbia Harbour House</div><div class="tfood">Clam chowder bread bowl, lobster roll, kids' chicken strips · ~$85</div></div></div><div class="tl-item"><span class="ttime">8:00 PM</span><div><div class="ttitle">Hocus Pocus Villain Spelltacular</div><div class="tnote">Arrive 30 min early. Hub lawn. Incredible castle projection show.</div></div></div><div class="tl-item"><span class="ttime">9:15 PM</span><div><div class="ttitle">Boo-to-You Halloween Parade</div><div class="tnote">Headless Horseman opens. Get girls to the front — unforgettable.</div></div></div><div class="tl-item"><span class="ttime">10:30 PM</span><div><div class="ttitle">Final rides — whatever the kids want</div><div class="tnote">Near-zero waits. Let them pick anything. Pure magic.</div></div></div></div>
+        <div style="font-size:12px;color:var(--amber-mid);font-weight:600;margin-top:4px">Est. day spend: ~$605 (BBB $400 + meals $205) · biggest spend day but the most magical</div>
+      </div>
+      <div id="dhs" style="display:none">
+        <div style="background:var(--green-bg);color:var(--green-text);font-size:12px;font-weight:600;padding:7px 12px;border-radius:var(--r);margin-bottom:10px">Hollywood Studios · Oct 9 · Low crowd day</div>
+        <div class="card"><div class="tl-item"><span class="ttime">8:29 AM</span><div><div class="ttitle">Individual LL — Rise of the Resistance · $22/person</div><div class="tnote">App open at 8:28. Tap the second it unlocks. ~$88 for the family.</div></div></div><div class="tl-item"><span class="ttime">8:30 AM</span><div><div class="ttitle">Early entry — Millennium Falcon: Smugglers Run</div><div class="tnote">Assign pilot seats before boarding.</div></div></div><div class="tl-item"><span class="ttime">9:30 AM</span><div><div class="ttitle">Slinky Dog Dash → Toy Story Mania</div><div class="tnote">Best family coaster at WDW. Do back-to-back while crowds are light.</div></div></div><div class="tl-item"><span class="ttime">11:00 AM</span><div><div class="ttitle">Lunch — Woody's Lunch Box</div><div class="tfood">Totchos (must-order), BBQ brisket melt, lunch box tarts · ~$65</div></div></div><div class="tl-item"><span class="ttime">12:30 PM</span><div><div class="ttitle">Rise of the Resistance (Lightning Lane time)</div><div class="tnote">Most immersive ride ever built. Kids will be speechless.</div></div></div><div class="tl-item"><span class="ttime">4:00 PM</span><div><div class="ttitle">Indiana Jones Stunt Spectacular</div><div class="tnote">40-min live stunt show — great rest. No wait, just walk in.</div></div></div><div class="tl-item"><span class="ttime">5:30 PM</span><div><div class="ttitle">Dinner — Sci-Fi Dine-In Theater</div><div class="tfood">Wagyu burger, lobster mac & cheese, kids' hot dog · eat in a "car" · ~$130</div></div></div><div class="tl-item"><span class="ttime">8:00 PM</span><div><div class="ttitle">Fantasmic! nighttime show</div><div class="tnote">Arrive 35 min early. Center seats for fire and water screens.</div></div></div></div>
+        <div style="font-size:12px;color:var(--amber-mid);font-weight:600;margin-top:4px">Est. day spend: ~$283 (meals $195 + Individual LL $88)</div>
+      </div>
+      <div id="dep" style="display:none">
+        <div style="background:var(--amber-bg);color:var(--amber-text);font-size:12px;font-weight:600;padding:7px 12px;border-radius:var(--r);margin-bottom:10px">Epcot · Oct 10 · Food & Wine Festival day</div>
+        <div class="card"><div class="tl-item"><span class="ttime">8:29 AM</span><div><div class="ttitle">Individual LL — Guardians of the Galaxy: Cosmic Rewind</div><div class="tnote">Reverse launch coaster · $20/person · ~$80 for the family</div></div></div><div class="tl-item"><span class="ttime">9:00 AM</span><div><div class="ttitle">Remy's Ratatouille → Frozen Ever After</div><div class="tnote">Both perfect for the girls. Do before 10 AM.</div></div></div><div class="tl-item"><span class="ttime">12:00 PM</span><div><div class="ttitle">Food & Wine Festival grazing</div><div class="tfood">Colombia: arepas · Morocco: lamb skewer · France: croque monsieur · Japan: teriyaki · Mexico: tres leches · Norway: School Bread</div></div></div><div class="tl-item"><span class="ttime">3:00 PM</span><div><div class="ttitle">Storm shelter — browse World Showcase</div><div class="tnote">Oct 10 PM storms expected 2–5 PM. Stay dry in pavilion buildings.</div></div></div><div class="tl-item"><span class="ttime">5:30 PM</span><div><div class="ttitle">Dinner — Le Cellier Steakhouse</div><div class="tfood">Canadian cheddar beer soup (legendary), filet mignon, kids' mac & cheese · ~$200</div></div></div><div class="tl-item"><span class="ttime">9:00 PM</span><div><div class="ttitle">Harmonious nighttime spectacular</div><div class="tnote">Between France and UK pavilions. Get School Bread from Norway while you wait.</div></div></div></div>
+        <div style="font-size:12px;color:var(--amber-mid);font-weight:600;margin-top:4px">Est. day spend: ~$380 (Le Cellier $200 + Food & Wine $110 + LL $80)</div>
+      </div>
+      <div id="dak" style="display:none">
+        <div style="background:var(--surface2);font-size:12px;font-weight:600;padding:7px 12px;border-radius:var(--r);margin-bottom:10px;color:var(--text2)">Animal Kingdom · Oct 11 · Last park day</div>
+        <div class="card"><div class="tl-item"><span class="ttime">8:00 AM</span><div><div class="ttitle">Early entry — Avatar: Flight of Passage</div><div class="tnote">Walk fast to Pandora. #1 most popular ride at WDW.</div></div></div><div class="tl-item"><span class="ttime">8:45 AM</span><div><div class="ttitle">Na'vi River Journey</div><div class="tnote">Gentle glowing boat ride — perfect for the girls.</div></div></div><div class="tl-item"><span class="ttime">9:30 AM</span><div><div class="ttitle">Kilimanjaro Safaris</div><div class="tnote">Morning = most active animals. Lions, giraffes, elephants up close.</div></div></div><div class="tl-item"><span class="ttime">10:30 AM</span><div><div class="ttitle">Expedition Everest → DINOSAUR</div></div></div><div class="tl-item"><span class="ttime">12:00 PM</span><div><div class="ttitle">Lunch — Satu'li Canteen · Pandora</div><div class="tfood">Cheeseburger steamed pod, grilled octopus bowl, blueberry mousse · ~$80</div></div></div><div class="tl-item"><span class="ttime">1:30 PM</span><div><div class="ttitle">Festival of the Lion King show</div><div class="tnote">Live acrobatics + fire. 30 min. Girls will be stunned.</div></div></div><div class="tl-item"><span class="ttime">2:30 PM</span><div><div class="ttitle">Kali River Rapids (optional — you WILL get wet)</div><div class="tnote">No BBB gowns to protect today! Perfect last day fun.</div></div></div><div class="tl-item"><span class="ttime">3:30 PM</span><div><div class="ttitle">Resort — final swim at Big Blue Pool</div><div class="tnote">Pack tonight. Flight at 3 PM tomorrow.</div></div></div></div>
+        <div style="font-size:12px;color:var(--amber-mid);font-weight:600;margin-top:4px">Est. day spend: ~$170 (meals $140 + Lightning Lane $30)</div>
+      </div>
+    </div>
+
+    <!-- RIDES (with live wait inline) -->
+    <div id="tab-rd" class="tab">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem;flex-wrap:wrap;gap:8px">
+        <div class="ftabs" style="margin:0;flex:1">
+          <button class="ftab active" onclick="filterRides('all',this)">All parks</button>
+          <button class="ftab" onclick="filterRides('mk',this)">Magic Kingdom</button>
+          <button class="ftab" onclick="filterRides('ep',this)">Epcot</button>
+          <button class="ftab" onclick="filterRides('hs',this)">Hollywood Studios</button>
+          <button class="ftab" onclick="filterRides('ak',this)">Animal Kingdom</button>
+        </div>
+        <button class="live-btn" onclick="fetchAllLiveData()" style="flex-shrink:0">
+          <span class="live-dot" id="live-dot3"></span>
+          <span>Live waits</span>
+        </button>
+      </div>
+      <div class="card" id="rl">
+        <div class="ride-row" data-park="mk" data-ride-id="tron"><div><div class="rname">Tron Lightcycle Run</div><div class="rpark">Magic Kingdom · Lightning Lane Multi Pass</div></div><div style="display:flex;align-items:center;gap:8px"><span class="wait-inline wi-na" data-wait="tron">—</span></div></div>
+        <div class="ride-row" data-park="mk" data-ride-id="sdmt"><div><div class="rname">Seven Dwarfs Mine Train</div><div class="rpark">Magic Kingdom · 38" min height</div></div><div style="display:flex;align-items:center;gap:8px"><span class="wait-inline wi-na" data-wait="sdmt">—</span></div></div>
+        <div class="ride-row" data-park="mk" data-ride-id="hm"><div><div class="rname">Haunted Mansion</div><div class="rpark">Magic Kingdom · all ages</div></div><div style="display:flex;align-items:center;gap:8px"><span class="wait-inline wi-na" data-wait="hm">—</span></div></div>
+        <div class="ride-row" data-park="mk" data-ride-id="sm"><div><div class="rname">Space Mountain</div><div class="rpark">Magic Kingdom · 44" min height</div></div><div style="display:flex;align-items:center;gap:8px"><span class="wait-inline wi-na" data-wait="sm">—</span></div></div>
+        <div class="ride-row" data-park="ep" data-ride-id="guardians"><div><div class="rname">Guardians of the Galaxy: Cosmic Rewind</div><div class="rpark">Epcot · Individual Lightning Lane · 42" min</div></div><div style="display:flex;align-items:center;gap:8px"><span class="wait-inline wi-na" data-wait="guardians">—</span></div></div>
+        <div class="ride-row" data-park="ep" data-ride-id="remy"><div><div class="rname">Remy's Ratatouille Adventure</div><div class="rpark">Epcot · all ages · great for girls</div></div><div style="display:flex;align-items:center;gap:8px"><span class="wait-inline wi-na" data-wait="remy">—</span></div></div>
+        <div class="ride-row" data-park="ep" data-ride-id="frozen"><div><div class="rname">Frozen Ever After</div><div class="rpark">Epcot · boat ride · all ages</div></div><div style="display:flex;align-items:center;gap:8px"><span class="wait-inline wi-na" data-wait="frozen">—</span></div></div>
+        <div class="ride-row" data-park="hs" data-ride-id="rotr"><div><div class="rname">Rise of the Resistance</div><div class="rpark">Hollywood Studios · Individual LL · 40" min</div></div><div style="display:flex;align-items:center;gap:8px"><span class="wait-inline wi-na" data-wait="rotr">—</span></div></div>
+        <div class="ride-row" data-park="hs" data-ride-id="slinky"><div><div class="rname">Slinky Dog Dash</div><div class="rpark">Hollywood Studios · 38" min · best family coaster</div></div><div style="display:flex;align-items:center;gap:8px"><span class="wait-inline wi-na" data-wait="slinky">—</span></div></div>
+        <div class="ride-row" data-park="hs" data-ride-id="tot"><div><div class="rname">Tower of Terror</div><div class="rpark">Hollywood Studios · 40" min · thrill seekers</div></div><div style="display:flex;align-items:center;gap:8px"><span class="wait-inline wi-na" data-wait="tot">—</span></div></div>
+        <div class="ride-row" data-park="ak" data-ride-id="fop"><div><div class="rname">Avatar: Flight of Passage</div><div class="rpark">Animal Kingdom · Individual LL · 44" min · #1 at WDW</div></div><div style="display:flex;align-items:center;gap:8px"><span class="wait-inline wi-na" data-wait="fop">—</span></div></div>
+        <div class="ride-row" data-park="ak" data-ride-id="everest"><div><div class="rname">Expedition Everest</div><div class="rpark">Animal Kingdom · 44" min · backwards coaster</div></div><div style="display:flex;align-items:center;gap:8px"><span class="wait-inline wi-na" data-wait="everest">—</span></div></div>
+        <div class="ride-row" data-park="ak" data-ride-id="safaris"><div><div class="rname">Kilimanjaro Safaris</div><div class="rpark">Animal Kingdom · all ages · go in the morning</div></div><div style="display:flex;align-items:center;gap:8px"><span class="wait-inline wi-na" data-wait="safaris">—</span></div></div>
+      </div>
+      <div style="font-size:10px;color:var(--text3)">Wait times are live — press "Live waits" to refresh. Park is closed or pre-trip when shown as "—"</div>
+    </div>
+
+    <!-- FOOD -->
+    <div id="tab-fd" class="tab">
+      <div class="sec">Sit-down restaurants · one per day · book Aug 9</div>
+      <div class="fgrid">
+        <div class="fc2"><div class="fimg" style="background:linear-gradient(135deg,#1a4a7a,#2d6ca8)"><span>🏰</span></div><div class="fbody"><div class="ftag">Magic Kingdom · Oct 8 · lunch</div><div class="fname">Be Our Guest</div><div class="fdesc">Dine in the Beast's castle in full BBB gowns. Request the Rose Gallery room.</div><div class="fprice">~$120 · book Aug 9</div></div></div>
+        <div class="fc2"><div class="fimg" style="background:linear-gradient(135deg,#2d1a4a,#4a2d7a)"><span>🚀</span></div><div class="fbody"><div class="ftag">Hollywood Studios · Oct 9 · dinner</div><div class="fname">Sci-Fi Dine-In</div><div class="fdesc">Eat in a retro convertible car watching B-movies. Kids are obsessed.</div><div class="fprice">~$130 · book Aug 9</div></div></div>
+        <div class="fc2"><div class="fimg" style="background:linear-gradient(135deg,#1a4a2d,#2d7a4a)"><span>🍁</span></div><div class="fbody"><div class="ftag">Epcot · Oct 10 · dinner</div><div class="fname">Le Cellier</div><div class="fdesc">Best steak at WDW. Canadian cheddar beer soup is legendary.</div><div class="fprice">~$200 · books in minutes</div></div></div>
+        <div class="fc2"><div class="fimg" style="background:linear-gradient(135deg,#1a3d1a,#2d662d)"><span>🌿</span></div><div class="fbody"><div class="ftag">Animal Kingdom · Oct 11 · lunch</div><div class="fname">Satu'li Canteen</div><div class="fdesc">Best counter service at WDW. Build-your-own bowls in Pandora.</div><div class="fprice">~$80 · walk up</div></div></div>
+      </div>
+      <div class="sec">Must-try snacks</div>
+      <div class="card">
+        <div class="row"><div><div class="rl">Dole Whip float</div><div class="rs">Magic Kingdom · Aloha Isle</div></div><span style="font-size:12px;font-weight:700;color:var(--text2)">~$7</span></div>
+        <div class="row"><div><div class="rl">Grey stuff</div><div class="rs">Magic Kingdom · Be Our Guest</div></div><span style="font-size:12px;font-weight:700;color:var(--text2)">~$7</span></div>
+        <div class="row"><div><div class="rl">Pumpkin spice croissant</div><div class="rs">Magic Kingdom · Main Street Bakery · Oct only</div></div><span style="font-size:12px;font-weight:700;color:var(--text2)">~$6</span></div>
+        <div class="row"><div><div class="rl">Totchos</div><div class="rs">Hollywood Studios · Woody's Lunch Box</div></div><span style="font-size:12px;font-weight:700;color:var(--text2)">~$11</span></div>
+        <div class="row"><div><div class="rl">School Bread</div><div class="rs">Epcot · Kringla Bakeri · Norway</div></div><span style="font-size:12px;font-weight:700;color:var(--text2)">~$6</span></div>
+        <div class="row"><div><div class="rl">Blueberry cream cheese mousse</div><div class="rs">Animal Kingdom · Satu'li Canteen</div></div><span style="font-size:12px;font-weight:700;color:var(--text2)">~$6</span></div>
+        <div class="row"><div><div class="rl">Lamb tagine skewer</div><div class="rs">Epcot · Food & Wine · Morocco booth · new 2026</div></div><span style="font-size:12px;font-weight:700;color:var(--text2)">~$9</span></div>
+      </div>
+    </div>
+
+    <!-- BBB -->
+    <div id="tab-bb" class="tab">
+      <div class="bbb-block">
+        <div style="background:var(--pink-bg);color:var(--pink-text);font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;display:inline-block;margin-bottom:8px;text-transform:uppercase;letter-spacing:.04em">Bibbidi Bobbidi Boutique · Oct 8</div>
+        <div style="font-family:'DM Serif Display',serif;font-size:17px;font-weight:400;margin-bottom:3px">Castle package · 2 girls · $400 total</div>
+        <div style="font-size:12px;color:var(--text2);margin-bottom:12px">Inside Cinderella Castle · 10:30 AM · 60 min · ages 3–12</div>
+        <div class="row"><div class="rl">Hair styling with gems & accessories</div><span class="badge bg">Included</span></div>
+        <div class="row"><div class="rl">Full makeup, shimmer & nail polish</div><span class="badge bg">Included</span></div>
+        <div class="row"><div class="rl">Premium costume gown (their choice)</div><span class="badge bg">Included</span></div>
+        <div class="row"><div class="rl">Tiara, wand & accessories</div><span class="badge bg">Included</span></div>
+        <div class="row"><div class="rl">PhotoPass photo session inside castle</div><span class="badge bg">Included</span></div>
+        <div class="row"><div class="rl">Gown goes home as a keepsake</div><span class="badge bg">Included</span></div>
+      </div>
+      <div class="sec">Princess options — each girl chooses her own</div>
+      <div class="pgrid">
+        <div class="pc"><div class="pname">Cinderella</div><div class="pdesc">Classic blue gown · most iconic look · inside her own castle</div></div>
+        <div class="pc"><div class="pname">Rapunzel</div><div class="pdesc">Purple & pink · braided hair styling is stunning</div></div>
+        <div class="pc"><div class="pname">Elsa</div><div class="pdesc">Ice blue gown · Frozen look · always a huge hit</div></div>
+        <div class="pc"><div class="pname">Tiana</div><div class="pdesc">Green gown · new 2026 option · limited availability</div></div>
+        <div class="pc"><div class="pname">Aurora</div><div class="pdesc">Sleeping Beauty · pink or blue gown</div></div>
+        <div class="pc"><div class="pname">Mix & match</div><div class="pdesc">They don't have to choose the same princess</div></div>
+      </div>
+      <div class="sec">Critical notes</div>
+      <div class="card">
+        <div class="row"><div><div class="rl">Book Aug 9 at 7 AM ET</div><div class="rs">Castle slots go in minutes — set an alarm</div></div><span class="badge br">Critical</span></div>
+        <div class="row"><div><div class="rl">Check in 15 min early</div><div class="rs">Strict about timing</div></div><span class="badge ba">Important</span></div>
+        <div class="row"><div><div class="rl">No water rides on Oct 8</div><div class="rs">Protect the gowns all day for the party tonight</div></div><span class="badge ba">Remember</span></div>
+        <div class="row"><div><div class="rl">Download PhotoPass within 45 days</div><div class="rs">My Disney Experience app — they expire</div></div><span class="badge bb">Don't forget</span></div>
+        <div class="row"><div><div class="rl">Bring a backup hair tie + small brush</div><div class="rs">Touch up before the party if needed</div></div><span class="badge bb">Pro tip</span></div>
+      </div>
+    </div>
+
+    <!-- MNSSHP -->
+    <div id="tab-pt" class="tab">
+      <div class="party-block">
+        <div style="background:var(--blue-bg);color:var(--blue-text);font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;display:inline-block;margin-bottom:8px;text-transform:uppercase;letter-spacing:.04em">Confirmed · Magic Kingdom · Oct 8</div>
+        <div style="font-family:'DM Serif Display',serif;font-size:17px;font-weight:400;margin-bottom:3px">Mickey's Not-So-Scary Halloween Party</div>
+        <div style="font-size:12px;color:var(--text2);margin-bottom:12px">7 PM – midnight · Entry from 4 PM · Wednesday = least crowded party night</div>
+        <div class="row"><div class="rl">Adult ticket (13+)</div><span class="badge ba">~$134/person</span></div>
+        <div class="row"><div class="rl">Child ticket (3–12)</div><span class="badge ba">~$124/person</span></div>
+        <div class="row"><div class="rl">Family of 4 — already in budget</div><span style="font-size:16px;font-weight:700;font-family:'DM Serif Display',serif">~$516</span></div>
+      </div>
+      <div class="sec">What's included</div>
+      <div class="card">
+        <div class="row"><div class="rl">Trick-or-treat trail</div><div class="rs">Full-size candy throughout the park</div></div>
+        <div class="row"><div class="rl">Boo-to-You Parade</div><div class="rs">9:15 PM and 11:15 PM · Headless Horseman opens</div></div>
+        <div class="row"><div class="rl">Hocus Pocus Villain Spelltacular</div><div class="rs">Castle stage show · arrive 30 min early</div></div>
+        <div class="row"><div class="rl">Special character meets</div><div class="rs">Halloween costume versions of Mickey, Minnie, and others</div></div>
+        <div class="row"><div class="rl">5–20 min ride waits</div><div class="rs">Party-only crowd after 7 PM</div></div>
+      </div>
+      <div class="sec">Costume plan</div>
+      <div class="card">
+        <div class="row"><div><div class="rl">Girls — BBB princess gowns from earlier</div><div class="rs">Gown + tiara + wand = perfect costume · characters give extra attention</div></div><span class="badge bp">Perfect combo</span></div>
+        <div class="row"><div><div class="rl">Adult 1 — Jack Skellington</div><div class="rs">Black pinstripe suit, bow tie, face paint · ~$50</div></div><span class="badge bpu">NBC theme</span></div>
+        <div class="row"><div><div class="rl">Adult 2 — Sally</div><div class="rs">Patchwork dress, red yarn wig · ~$50 · pairs perfectly</div></div><span class="badge bpu">NBC theme</span></div>
+      </div>
+    </div>
+
+    <!-- RESORT -->
+    <div id="tab-rs" class="tab">
+      <div class="resort-hero"><span>Little Mermaid Room · Art of Animation</span></div>
+      <div class="card">
+        <div class="aoa-row"><div class="aoa-lbl">Room theme</div><div class="aoa-val">Under the Sea — Ariel murals, coral details, ocean color palette throughout</div></div>
+        <div class="aoa-row"><div class="aoa-lbl">Sleeps</div><div class="aoa-val">4 guests · 2 queen beds · perfect for your family</div></div>
+        <div class="aoa-row"><div class="aoa-lbl">2026 nightly rate</div><div class="aoa-val">~$280–$440/night · 5 nights = ~$2,200 budgeted</div></div>
+        <div class="aoa-row"><div class="aoa-lbl">Best room location</div><div class="aoa-val">Request buildings 7–10 at check-in — closest to Big Blue Pool and food court</div></div>
+        <div class="aoa-row"><div class="aoa-lbl">Early park entry</div><div class="aoa-val">30 min early every day — critical for Tron, Flight of Passage, Rise of the Resistance</div></div>
+        <div class="aoa-row"><div class="aoa-lbl">Big Blue Pool</div><div class="aoa-val">Nemo themed, largest pool at WDW. Use it Oct 7 arrival and Oct 12 morning.</div></div>
+        <div class="aoa-row"><div class="aoa-lbl">Landscape of Flavors</div><div class="aoa-val">Food court open 6 AM — grab breakfast before park. ~$30/morning.</div></div>
+        <div class="aoa-row"><div class="aoa-lbl">BBB day tip</div><div class="aoa-val">Oct 8 resort break 3:30–4 PM is essential — protects the girls' BBB looks for the party.</div></div>
+      </div>
+      <div class="sec">Bus times to parks</div>
+      <div class="card">
+        <div class="row"><div class="rl">Magic Kingdom</div><span style="font-size:12px;font-weight:700;color:var(--text2)">~20–30 min</span></div>
+        <div class="row"><div class="rl">Hollywood Studios</div><span style="font-size:12px;font-weight:700;color:var(--text2)">~15–20 min</span></div>
+        <div class="row"><div class="rl">Epcot</div><span style="font-size:12px;font-weight:700;color:var(--text2)">~15–20 min</span></div>
+        <div class="row"><div class="rl">Animal Kingdom</div><span style="font-size:12px;font-weight:700;color:var(--text2)">~20–30 min</span></div>
+      </div>
+    </div>
+
+    <!-- TOYS -->
+    <div id="tab-ty" class="tab">
+      <div style="background:var(--blue-bg);color:var(--blue-text);font-size:12px;font-weight:600;padding:7px 12px;border-radius:var(--r);margin-bottom:1rem">Toy budget: $400 · ~$150–175/girl + $50 adults · BBB gown already included in the experience</div>
+      <div class="sec">Strategy</div>
+      <div class="card">
+        <div class="row"><div><div class="rl">Tell each girl her budget upfront</div><div class="rs">$150–175 each — they spend it however they want across all 4 days</div></div><span class="badge bg">Do this first</span></div>
+        <div class="row"><div><div class="rl">Don't buy anything day 1 or 2</div><div class="rs">Wait until day 3 — they'll make better, happier choices</div></div><span class="badge bb">Pro tip</span></div>
+        <div class="row"><div><div class="rl">Buy Mickey ears before the trip</div><div class="rs">ShopDisney $15–25 vs $35+ in parks — saves ~$80 for the family</div></div><span class="badge ba">Save $80</span></div>
+      </div>
+      <div class="sec">Best picks by park</div>
+      <div class="tgrid">
+        <div class="tc"><div class="twho">Magic Kingdom</div><div class="tname">Personalized ear hat</div><div class="twhere">Main Street · embroidered name</div><div class="tprice">~$30</div></div>
+        <div class="tc"><div class="twho">Hollywood Studios</div><div class="tname">Droid Depot build-a-droid</div><div class="twhere">Galaxy's Edge · R2 or BB-8</div><div class="tprice">~$120 · big splurge</div></div>
+        <div class="tc"><div class="twho">Hollywood Studios</div><div class="tname">Legacy lightsaber</div><div class="twhere">Dok-Ondar's Den</div><div class="tprice">~$55</div></div>
+        <div class="tc"><div class="twho">Epcot</div><div class="tname">Figment plush</div><div class="twhere">Journey Into Imagination</div><div class="tprice">~$28 · Epcot icon</div></div>
+        <div class="tc"><div class="twho">Animal Kingdom</div><div class="tname">Banshee (Avatar)</div><div class="twhere">Windtraders · Pandora</div><div class="tprice">~$30 · clips to shoulder</div></div>
+        <div class="tc"><div class="twho">Any park</div><div class="tname">MagicBand+</div><div class="twhere">Most gift shops</div><div class="tprice">~$35 · lights up on rides</div></div>
+        <div class="tc"><div class="twho">Adults</div><div class="tname">Mickey ears (order online)</div><div class="twhere">ShopDisney before trip</div><div class="tprice">~$25 online vs $38 in park</div></div>
+        <div class="tc"><div class="twho">BBB included</div><div class="tname">Princess gown + wand + tiara</div><div class="twhere">Goes home in BBB bag</div><div class="tprice">In the $400 experience</div></div>
+      </div>
+    </div>
+
+    <!-- PACKING -->
+    <div id="tab-pk" class="tab">
+      <div class="prog-wrap">
+        <div class="prog-lbl"><span id="plbl">0 of 0 items packed</span></div>
+        <div class="prog-bar"><div class="prog-fill" id="pfill" style="width:0%"></div></div>
+      </div>
+      <div class="pack-grid">
+        <div class="pack-card">
+          <div class="pack-title">Adults clothing</div>
+          <div class="pi" onclick="tp(this)"><div class="pck"></div><div><div class="ptxt">5× moisture-wicking t-shirts each</div><div class="pnote">Light colors — 84°F in October</div></div></div>
+          <div class="pi" onclick="tp(this)"><div class="pck"></div><div><div class="ptxt">5× comfortable shorts/pants</div><div class="pnote">8–12 miles walking per day</div></div></div>
+          <div class="pi" onclick="tp(this)"><div class="pck"></div><div><div class="ptxt">1× light hoodie each</div><div class="pnote">AC restaurants + cool evenings</div></div></div>
+          <div class="pi" onclick="tp(this)"><div class="pck"></div><div><div class="ptxt">Broken-in walking shoes</div><div class="pnote">Never. New. Shoes.</div></div></div>
+          <div class="pi" onclick="tp(this)"><div class="pck"></div><div><div class="ptxt">Swimsuit + flip flops</div></div></div>
+          <div class="pi" onclick="tp(this)"><div class="pck"></div><div><div class="ptxt">Jack + Sally costumes (Oct 8 party)</div></div></div>
+          <div class="pi" onclick="tp(this)"><div class="pck"></div><div><div class="ptxt">Mickey ears (order ShopDisney first)</div><div class="pnote">Save $20/pair vs in-park</div></div></div>
+        </div>
+        <div class="pack-card">
+          <div class="pack-title">Girls clothing (×2)</div>
+          <div class="pi" onclick="tp(this)"><div class="pck"></div><div><div class="ptxt">5× breathable outfits + 1 spare each</div></div></div>
+          <div class="pi" onclick="tp(this)"><div class="pck"></div><div><div class="ptxt">Broken-in sneakers</div></div></div>
+          <div class="pi" onclick="tp(this)"><div class="pck"></div><div><div class="ptxt">Water sandals / Crocs</div><div class="pnote">Pool + Kali River Rapids Oct 11</div></div></div>
+          <div class="pi" onclick="tp(this)"><div class="pck"></div><div><div class="ptxt">Rain poncho each</div><div class="pnote">Oct 10 PM storms expected</div></div></div>
+          <div class="pi" onclick="tp(this)"><div class="pck"></div><div><div class="ptxt">Trick-or-treat bags (real candy bags)</div><div class="pnote">Disney gives full-size candy</div></div></div>
+          <div class="pi" onclick="tp(this)"><div class="pck"></div><div><div class="ptxt">Backup hair tie + small brush</div><div class="pnote">Touch up BBB hair before party</div></div></div>
+          <div class="pi" onclick="tp(this)"><div class="pck"></div><div><div class="ptxt">Glow bracelets (Amazon — cheap pack)</div><div class="pnote">Saves $50+ vs park glow toys</div></div></div>
+        </div>
+        <div class="pack-card">
+          <div class="pack-title">Park bag essentials</div>
+          <div class="pi" onclick="tp(this)"><div class="pck"></div><div><div class="ptxt">Sunscreen SPF 50+</div><div class="pnote">Reapply every 2 hrs</div></div></div>
+          <div class="pi" onclick="tp(this)"><div class="pck"></div><div><div class="ptxt">Refillable water bottles × 4</div><div class="pnote">Free ice water at any counter service</div></div></div>
+          <div class="pi" onclick="tp(this)"><div class="pck"></div><div><div class="ptxt">Portable phone charger</div><div class="pnote">Disney app kills battery fast</div></div></div>
+          <div class="pi" onclick="tp(this)"><div class="pck"></div><div><div class="ptxt">Blister bandages (Compeed)</div></div></div>
+          <div class="pi" onclick="tp(this)"><div class="pck"></div><div><div class="ptxt">Kids' snacks from home</div><div class="pnote">Saves $30–40/day</div></div></div>
+          <div class="pi" onclick="tp(this)"><div class="pck"></div><div><div class="ptxt">Autograph book + Sharpies</div></div></div>
+          <div class="pi" onclick="tp(this)"><div class="pck"></div><div><div class="ptxt">Handheld battery fan</div><div class="pnote">Game changer at 84°F</div></div></div>
+        </div>
+        <div class="pack-card">
+          <div class="pack-title">Book before you go</div>
+          <div class="pi" onclick="tp(this)"><div class="pck"></div><div><div class="ptxt">MNSSHP tickets — buy NOW</div><div class="pnote">Sell out months in advance</div></div></div>
+          <div class="pi" onclick="tp(this)"><div class="pck"></div><div><div class="ptxt">BBB appointment — Aug 9 at 7 AM ET</div><div class="pnote">Castle slots go fast</div></div></div>
+          <div class="pi" onclick="tp(this)"><div class="pck"></div><div><div class="ptxt">Be Our Guest — Aug 9 at 7 AM</div></div></div>
+          <div class="pi" onclick="tp(this)"><div class="pck"></div><div><div class="ptxt">Le Cellier dinner — Aug 9 at 7 AM</div><div class="pnote">Hardest Epcot reservation</div></div></div>
+          <div class="pi" onclick="tp(this)"><div class="pck"></div><div><div class="ptxt">Sci-Fi Dine-In dinner — Aug 9</div></div></div>
+          <div class="pi" onclick="tp(this)"><div class="pck"></div><div><div class="ptxt">My Disney Experience — all tickets linked</div></div></div>
+          <div class="pi" onclick="tp(this)"><div class="pck"></div><div><div class="ptxt">Mickey ears ordered on ShopDisney</div></div></div>
+          <div class="pi" onclick="tp(this)"><div class="pck"></div><div><div class="ptxt">Glow bracelets ordered on Amazon</div></div></div>
+          <div class="pi" onclick="tp(this)"><div class="pck"></div><div><div class="ptxt">United flights booked</div></div></div>
+          <div class="pi" onclick="tp(this)"><div class="pck"></div><div><div class="ptxt">Art of Animation reservation confirmed</div></div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// ─── Tab navigation ───────────────────────────────────────
+function showTab(id,btn){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.ntab').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+function showDay(id,btn){
+  ['mk','hs','ep','ak'].forEach(d=>{
+    const el=document.getElementById('d'+d);
+    if(el)el.style.display=d===id?'block':'none';
+  });
+  document.querySelectorAll('#tab-dp .ftab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+function filterRides(park,btn){
+  document.querySelectorAll('#tab-rd .ftab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('#rl .ride-row').forEach(r=>{
+    r.style.display=(park==='all'||r.dataset.park===park)?'flex':'none';
+  });
+}
+function updateBudget(){
+  const inputs=document.querySelectorAll('#tab-bud input[type=number]');
+  let total=0;inputs.forEach(i=>total+=parseFloat(i.value)||0);
+  const rem=9000-total;
+  document.getElementById('ts').textContent='$'+Math.round(total).toLocaleString();
+  const re=document.getElementById('rem');
+  re.textContent='$'+Math.round(rem).toLocaleString();
+  re.style.color=rem<0?'var(--red-mid)':rem<300?'var(--amber-mid)':'var(--green-mid)';
+}
+function tp(item){
+  item.classList.toggle('packed');
+  item.querySelector('.pck').classList.toggle('done');
+  const all=document.querySelectorAll('.pi').length;
+  const done=document.querySelectorAll('.pi.packed').length;
+  const pct=Math.round(done/all*100);
+  document.getElementById('pfill').style.width=pct+'%';
+  document.getElementById('plbl').textContent=done+' of '+all+' items packed';
+}
+function initCountdown(){
+  const trip=new Date('2026-10-07T00:00:00');
+  const now=new Date();
+  const days=Math.ceil((trip-now)/(1000*60*60*24));
+  document.getElementById('dtg').textContent=days>0?days:'0';
+  document.getElementById('cd-pill').textContent=days>0?days+' days to go':'Trip time!';
+}
+const allItems=document.querySelectorAll('.pi').length;
+document.getElementById('plbl').textContent='0 of '+allItems+' items packed';
+initCountdown();
+
+// ─── Weather code helpers ─────────────────────────────────
+function wmoIcon(code){
+  if(code===0)return'☀️';
+  if(code<=2)return'⛅';
+  if(code===3)return'☁️';
+  if(code<=48)return'🌫️';
+  if(code<=55)return'🌦️';
+  if(code<=65)return'🌧️';
+  if(code<=77)return'❄️';
+  if(code<=82)return'🌦️';
+  if(code<=99)return'⛈️';
+  return'🌤️';
+}
+function wmoText(code){
+  if(code===0)return'Clear sky';
+  if(code===1)return'Mainly clear';
+  if(code===2)return'Partly cloudy';
+  if(code===3)return'Overcast';
+  if(code<=48)return'Foggy';
+  if(code<=55)return'Light drizzle';
+  if(code<=65)return'Rain';
+  if(code<=77)return'Snow';
+  if(code<=82)return'Rain showers';
+  if(code<=99)return'Thunderstorms';
+  return'Mixed';
+}
+
+// ─── Park entity IDs (themeparks.wiki) ──────────────────
+const PARKS={
+  mk:{id:'75ea578a-adc8-4116-a54d-dccb60765ef0',name:'Magic Kingdom'},
+  ep:{id:'47f90d2c-e191-4239-a466-5892ef59a88b',name:'Epcot'},
+  hs:{id:'288747d1-8b4f-4a64-867e-ea7c9b27bad8',name:'Hollywood Studios'},
+  ak:{id:'1c84a229-8862-4648-9c71-378ddd2c7693',name:'Animal Kingdom'}
+};
+
+// Keyword matching — maps our ride IDs to name fragments
+const RIDE_KEYWORDS={
+  tron:['tron'],
+  sdmt:['seven dwarfs','mine train'],
+  hm:['haunted mansion'],
+  sm:['space mountain'],
+  guardians:['guardians','cosmic rewind'],
+  remy:["remy","ratatouille"],
+  frozen:['frozen ever after'],
+  rotr:['rise of the resistance'],
+  slinky:['slinky'],
+  tot:['tower of terror'],
+  fop:['flight of passage'],
+  everest:['expedition everest'],
+  safaris:['kilimanjaro','safari']
+};
+
+function matchRide(rideName, rideKey){
+  const n=rideName.toLowerCase();
+  return RIDE_KEYWORDS[rideKey]?.some(k=>n.includes(k));
+}
+
+let liveWaitData={};
+
+// ─── Set loading state ────────────────────────────────────
+function setLoading(on){
+  ['live-dot','live-dot2','live-dot3'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(!el)return;
+    el.className='live-dot'+(on?' loading':liveWaitData.loaded?' live':'');
+  });
+  const btn=document.getElementById('live-btn');
+  const lbl=document.getElementById('live-btn-lbl');
+  if(btn)btn.classList.toggle('loading',on);
+  if(lbl)lbl.textContent=on?'Updating…':'Get live data';
+  const lbl2=document.getElementById('live-btn2-lbl');
+  if(lbl2)lbl2.textContent=on?'Updating…':'Refresh';
+}
+
+// ─── Fetch all live data ──────────────────────────────────
+async function fetchAllLiveData(){
+  setLoading(true);
+  try{
+    await Promise.all([fetchWeather(),fetchWaits()]);
+    liveWaitData.loaded=true;
+    const now=new Date();
+    const timeStr=now.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+    document.getElementById('last-updated-lbl').textContent='Updated '+timeStr;
+    document.getElementById('lv-badge').classList.add('show');
+  }catch(e){
+    console.error('Live data fetch error:',e);
+  }finally{
+    setLoading(false);
+  }
+}
+
+// ─── Weather fetch (open-meteo, no key needed) ────────────
+async function fetchWeather(){
+  const url='https://api.open-meteo.com/v1/forecast?latitude=28.3772&longitude=-81.5707&current=temperature_2m,weathercode,windspeed_10m,relative_humidity_2m&daily=temperature_2m_max,temperature_2m_min,weathercode,precipitation_probability_max&temperature_unit=fahrenheit&windspeed_unit=mph&timezone=America%2FNew_York&forecast_days=7';
+  const r=await fetch(url);
+  if(!r.ok)throw new Error('Weather fetch failed');
+  const d=await r.json();
+  renderWeather(d);
+}
+
+function renderWeather(d){
+  const cur=d.current;
+  const daily=d.daily;
+  const temp=Math.round(cur.temperature_2m);
+  const icon=wmoIcon(cur.weathercode);
+  const cond=wmoText(cur.weathercode);
+  const wind=Math.round(cur.windspeed_10m);
+  const hum=Math.round(cur.relative_humidity_2m);
+
+  // Current conditions bar
+  const cwBar=document.getElementById('current-weather-bar');
+  cwBar.innerHTML=`<div class="current-weather">
+    <div class="cw-icon">${icon}</div>
+    <div>
+      <div style="display:flex;align-items:baseline;gap:6px">
+        <div class="cw-temp">${temp}°F</div>
+        <div style="font-size:12px;color:var(--text2)">Orlando now</div>
+      </div>
+      <div class="cw-cond">${cond}</div>
+      <div class="cw-details">
+        <div class="cw-detail">Wind <span>${wind} mph</span></div>
+        <div class="cw-detail">Humidity <span>${hum}%</span></div>
+      </div>
+    </div>
+  </div>`;
+  cwBar.style.display='block';
+  document.getElementById('weather-live-badge').style.display='block';
+
+  // Trip dates Oct 8–11 (find in forecast)
+  const tripDates=['2026-10-08','2026-10-09','2026-10-10','2026-10-11'];
+  const dayNames=['Wed Oct 8','Thu Oct 9','Fri Oct 10','Sat Oct 11'];
+  const wgrid=document.getElementById('wgrid');
+
+  // Check if forecast covers trip dates
+  const forecastDates=daily.time||[];
+  const hasTripData=tripDates.some(td=>forecastDates.includes(td));
+
+  if(hasTripData){
+    wgrid.innerHTML='';
+    tripDates.forEach((td,i)=>{
+      const idx=forecastDates.indexOf(td);
+      if(idx===-1){
+        wgrid.innerHTML+=`<div class="wc"><div class="wdate">${dayNames[i]}</div><div style="font-size:11px;color:var(--text3)">Not in range</div></div>`;
+        return;
+      }
+      const hi=Math.round(daily.temperature_2m_max[idx]);
+      const lo=Math.round(daily.temperature_2m_min[idx]);
+      const wc=daily.weathercode[idx];
+      const precip=daily.precipitation_probability_max[idx];
+      const condColor=precip>50?'color:var(--amber-mid)':'';
+      wgrid.innerHTML+=`<div class="wc live-data">
+        <div class="wdate">${dayNames[i]}</div>
+        <span class="wicon">${wmoIcon(wc)}</span>
+        <div class="whi">${hi}°F</div>
+        <div class="wlo">Low ${lo}°F</div>
+        <div class="wcond" style="${condColor}">${wmoText(wc)}${precip>30?' · '+precip+'% rain':''}</div>
+      </div>`;
+    });
+  }
+
+  // Also update Live tab weather
+  const lvWeather=document.getElementById('lv-weather');
+  lvWeather.innerHTML=`<div class="current-weather card" style="gap:16px">
+    <div class="cw-icon" style="font-size:42px">${icon}</div>
+    <div>
+      <div style="display:flex;align-items:baseline;gap:8px">
+        <div class="cw-temp" style="font-size:36px">${temp}°F</div>
+        <div style="font-size:13px;color:var(--text2)">Orlando, FL · right now</div>
+      </div>
+      <div class="cw-cond" style="font-size:13px;margin-top:4px">${cond}</div>
+      <div class="cw-details" style="margin-top:8px;gap:16px">
+        <div class="cw-detail">Wind <span>${wind} mph</span></div>
+        <div class="cw-detail">Humidity <span>${hum}%</span></div>
+        <div class="cw-detail" style="font-size:10px;color:var(--text3)">${hasTripData?'Trip forecast ✓':'Trip dates outside 7-day window'}</div>
+      </div>
+    </div>
+  </div>`;
+}
+
+// ─── Wait times fetch (themeparks.wiki) ─────────────────
+async function fetchWaits(){
+  const parkKeys=Object.keys(PARKS);
+  const results=await Promise.allSettled(
+    parkKeys.map(k=>
+      fetch(`https://api.themeparks.wiki/v1/entity/${PARKS[k].id}/live`)
+        .then(r=>{if(!r.ok)throw new Error('HTTP '+r.status);return r.json();})
+        .then(d=>({key:k,data:d}))
+    )
+  );
+
+  const container=document.getElementById('lv-waits');
+  container.innerHTML='<div class="park-grid"></div>';
+  const grid=container.querySelector('.park-grid');
+  const note=document.getElementById('wait-time-note');
+  note.textContent='As of right now · data: themeparks.wiki';
+
+  results.forEach((res,i)=>{
+    const key=parkKeys[i];
+    const parkName=PARKS[key].name;
+
+    if(res.status==='rejected'){
+      grid.innerHTML+=`<div class="park-card">
+        <div class="park-card-hdr"><div class="park-card-name">${parkName}</div><div class="park-card-status park-closed">Error</div></div>
+        <div class="live-error" style="margin:.5rem">Could not load data. API may be unavailable.</div>
+      </div>`;
+      return;
+    }
+
+    const d=res.value.data;
+    const lives=d.liveData||[];
+
+    // Filter to OPERATING attractions with wait times
+    const rides=lives
+      .filter(e=>e.entityType==='ATTRACTION'&&e.status==='OPERATING'&&e.queue?.STANDBY?.waitTime!=null)
+      .sort((a,b)=>(b.queue.STANDBY.waitTime||0)-(a.queue.STANDBY.waitTime||0))
+      .slice(0,8);
+
+    const isOpen=lives.some(e=>e.status==='OPERATING');
+    const statusClass=isOpen?'park-open':'park-closed';
+    const statusText=isOpen?'Open now':'Closed';
+
+    // Check for park hours
+    let hoursHTML='';
+    const parkEntry=d.liveData?.find(e=>e.entityType==='PARK');
+    if(parkEntry?.operatingHours?.length){
+      const h=parkEntry.operatingHours[0];
+      hoursHTML=`<div class="park-hours">${h.type}: ${fmtTime(h.openingTime)} – ${fmtTime(h.closingTime)}</div>`;
+    }
+
+    let ridesHTML='';
+    if(rides.length===0){
+      ridesHTML=`<div style="padding:.75rem 1rem;font-size:12px;color:var(--text3)">${isOpen?'No wait times available':'Park is closed or pre-trip'}</div>`;
+    }else{
+      rides.forEach(r=>{
+        const wait=r.queue.STANDBY.waitTime;
+        const max=120;
+        const pct=Math.min(100,Math.round(wait/max*100));
+        const cls=wait<=20?'wait-low':wait<=45?'wait-med':'wait-high';
+        const barColor=wait<=20?'var(--green-mid)':wait<=45?'var(--amber-mid)':'var(--red-mid)';
+        ridesHTML+=`<div class="wait-item">
+          <div class="wait-name" title="${r.name}">${r.name}</div>
+          <div class="wait-bar"><div class="wait-bar-fill" style="width:${pct}%;background:${barColor}"></div></div>
+          <div class="wait-time ${cls}">${wait} min</div>
+        </div>`;
+
+        // Update rides tab
+        updateRideWait(key, r.name, wait);
+      });
+    }
+
+    grid.innerHTML+=`<div class="park-card">
+      <div class="park-card-hdr">
+        <div class="park-card-name">${parkName}</div>
+        <div class="park-card-status ${statusClass}">${statusText}</div>
+      </div>
+      ${hoursHTML}
+      <div class="wait-list">${ridesHTML}</div>
+    </div>`;
+  });
+}
+
+function fmtTime(iso){
+  if(!iso)return'?';
+  try{
+    return new Date(iso).toLocaleTimeString([],{hour:'numeric',minute:'2-digit',timeZone:'America/New_York'});
+  }catch{return iso.slice(11,16);}
+}
+
+function updateRideWait(parkKey, rideName, wait){
+  const rideKeys=Object.keys(RIDE_KEYWORDS);
+  rideKeys.forEach(rk=>{
+    // Only match if the park aligns
+    const rows=document.querySelectorAll(`#rl .ride-row[data-park="${parkKey}"]`);
+    rows.forEach(row=>{
+      if(matchRide(rideName, rk) && row.dataset.rideId===rk){
+        const badge=row.querySelector('.wait-inline');
+        if(badge){
+          badge.textContent=wait+' min';
+          badge.className='wait-inline '+(wait<=20?'wi-low':wait<=45?'wi-med':'wi-high');
+        }
+      }
+    });
+  });
+}
+</script>
+</body>
+</html>
